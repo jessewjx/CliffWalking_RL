@@ -13,8 +13,6 @@ class Solver:
         self.ydim = ydim
         self.Qdict = {}
 
-
-
     def epsilon_greedy(self, state):
         random_seed = np.random.random()
 
@@ -27,7 +25,6 @@ class Solver:
 
         return action
 
-
     def init_Qdict(self):
         state_actions = []
         for x in range(0,self.xdim):
@@ -38,13 +35,9 @@ class Solver:
         for k in state_actions:
             self.Qdict[k] = 0
 
-
-
     def Q(self, state,action):
         # return the Q value
         return self.Qdict[(tuple(state),action)]
-
-
 
     def Qlearning(self):
         # initialize Q function
@@ -142,6 +135,16 @@ class Solver:
 
         return cumReward_trajectory
 
+    def Visualize_learned_policy(self):
+
+        for x in range(0, self.xdim):
+            for y in range(0, self.ydim):
+                state = [x,y]
+                state_Qdict = {action: self.Q(state, action) for action in MDP.actions(state)}
+                action = max(state_Qdict, key=state_Qdict.get)
+
+
+
 
 
 if __name__ == '__main__':
@@ -176,6 +179,5 @@ if __name__ == '__main__':
     plt.plot(x, Sreward_arr,label = "Sarsa")
     plt.xlabel('episode count')
     plt.ylabel('cummulative reward')
-    # plt.title('Interesting Graph\nCheck it out')
     plt.legend()
     plt.show()
