@@ -1,8 +1,5 @@
 from typing import List, Callable, Tuple, Any
 
-
-
-
 def startState() -> List:
     """
     Return the start state.
@@ -10,23 +7,17 @@ def startState() -> List:
     """
     return [0, 0, 0]
 
-
-
 def actions(state: Tuple) -> List[str]:
     """
     Return set of actions possible from |state|.
     """
     return ['Up', 'Down', 'Left','Right']
 
-
-
 def IsEnd(state: List) -> bool:
     if state[2] == 249 or state[0:2] == [11, 0]:
         return True
     else:
         return False
-
-
 
 def succAndReward(state: Tuple, action: str) -> List:
     """
@@ -49,8 +40,6 @@ def succAndReward(state: Tuple, action: str) -> List:
             nextState.append(-1)
             return nextState
 
-
-
     if action == "Down":
         # hit the cliff
         if state[1] - 1 == 0 and state[0] > 0 and state[0] < 10:
@@ -68,8 +57,6 @@ def succAndReward(state: Tuple, action: str) -> List:
             nextState.append(-1)
             return nextState
 
-
-
     if action == "Left":
         # hit the cliff
         if state[1] == 0 and state[0] - 1 ==10:
@@ -86,7 +73,6 @@ def succAndReward(state: Tuple, action: str) -> List:
             nextState = [state[0]-1, state[1], state[2] + 1]
             nextState.append(-1)
             return nextState
-
 
     if action == "Right":
         # hit the cliff
