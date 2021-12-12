@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 
 class Solver:
-    def __init__(self, epsilon, num_episodes, alpha, gamma, xdim, ydim, varying_epsilon):
+    def __init__(self, epsilon, num_episodes, alpha, gamma, xdim, ydim, varying_epsilon, initial_Q):
         self.epsilon = epsilon
         self.num_episodes = num_episodes
         self.alpha = alpha
@@ -12,6 +12,7 @@ class Solver:
         self.xdim = xdim
         self.ydim = ydim
         self.varying_epsilon = varying_epsilon
+        self.initial_Q = initial_Q
         self.Qdict = {}
 
     def epsilon_greedy(self, state):
@@ -32,7 +33,7 @@ class Solver:
                     state_actions.append( ((x,y), a) )
 
         for k in state_actions:
-            self.Qdict[k] = 0
+            self.Qdict[k] = self.initial_Q
 
 
     def Q(self, state,action):
@@ -162,7 +163,8 @@ class Solver:
 
 
 if __name__ == '__main__':
-    varying_epsion = True
+    varying_epsion = False
+    initial_Q = 0
     epsilon = 0.1
     num_episodes = 500
     num_runs = 10
@@ -170,7 +172,7 @@ if __name__ == '__main__':
     alpha = 0.5
     xdim = 12
     ydim = 4
-    gw = Solver(epsilon, num_episodes, alpha, gamma, xdim, ydim,varying_epsion)
+    gw = Solver(epsilon, num_episodes, alpha, gamma, xdim, ydim,varying_epsion,initial_Q)
 
     if varying_epsion:
         print("Varying Epsilon...")
